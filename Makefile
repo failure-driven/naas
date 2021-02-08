@@ -30,4 +30,7 @@ d.PHONY: deploy
 deploy:
 	RAILS_MASTER_KEY=`cat config/master.key` \
 		HEROKU_APP_NAME=stg-naas \
+		SCHEME=http \
+		HOST=stg-naas.herokuapp.com \
+		PORT=80 \
 		bin/makefile/heroku-create
