@@ -28,6 +28,15 @@ gem "jbuilder", "~> 2.7"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
 
+# administration
+gem "administrate"
+gem "administrate-field-jsonb"
+
+# API
+gem "graphiql-rails", group: :development
+gem "graphql"
+gem "rack-cors", require: "rack/cors"
+
 # Adding for consistent Ruby styling
 gem "rubocop"
 gem "rubocop-rails"

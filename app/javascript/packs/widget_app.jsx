@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Widget from '../src/components/Widget/Widget';
+
 const render = (node) => {
   // const componentsMap = new Map([
   //   ["CallableComponent1", CallableComponent1],
@@ -12,10 +14,7 @@ const render = (node) => {
   try {
     if (node) {
       ReactDOM.render(
-        <div>
-          hello
-          {node.dataset.token}
-        </div>,
+        <Widget toke={node.dataset.toke} />,
         //         <DynamicComponent token={node.dataset.token} />,
         node.appendChild(document.createElement('div')),
       );

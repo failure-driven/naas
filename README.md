@@ -1,3 +1,13 @@
+<h1 align="center">NaaS</h1>
+
+<div align="center">
+
+[![CircleCI](https://circleci.com/gh/failure-driven/naas.svg?style=svg)](https://circleci.com/gh/failure-driven/naas)
+
+</div>
+
+NaaS - embedded notifications for your site!
+
 # README
 
 This README would normally document whatever steps are necessary to get the
