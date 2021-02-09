@@ -28,6 +28,15 @@ gem "jbuilder", "~> 2.7"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
 
+# User management
+gem "devise"
+
+# email
+gem "premailer-rails"
+
+# Email sending on heroku
+gem "sendgrid-ruby"
+
 # administration
 gem "administrate"
 gem "administrate-field-jsonb"
@@ -73,6 +82,9 @@ group :development, :test do
 
   # dev and test to be able to call binding.pry in specs
   gem "pry-byebug"
+  #
+  # allow viewing emails in development
+  gem "letter_opener"
 end
 
 group :development do

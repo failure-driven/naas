@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   namespace :admin do
     resources :notifications
 
@@ -10,4 +12,6 @@ Rails.application.routes.draw do
 
   get "/naas" => "scripts#index"
   get "test_root", to: "rails/welcome#index", as: "test_root_rails"
+
+  root to: "home#index"
 end
