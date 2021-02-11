@@ -5,3 +5,8 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 @import "~bootstrap/scss/bootstrap";
 
+.alert {
+  &.alert-alert {
+    @extend .alert-warning;
+  }
+}

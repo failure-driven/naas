@@ -1,0 +1,49 @@
+<%= content_for :site_nav do %>
+  <ul class="nav text-light">
+    <li class="nav-item">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-dark p-0">
+          <li class="breadcrumb-item text-light"><%= link_to "Sites", sites_path %></li>
+          <li class="breadcrumb-item active text-light" aria-current="page"><%= @site.url %></li>
+        </ol>
+      </nav>
+    </li>
+  </ul>
+<% end %>
+
+<%= render "sites_nav" %>
+
+<div class="row mt-3">
+  <div class="col-sm-2">
+    <strong class="float-right">Url:</strong>
+  </div>
+  <div class="col-sm-10">
+    <%= @site.url %>
+    <%= link_to "Edit", edit_site_path(@site), class: "btn btn-outline-secondary float-right" %>
+  </div>
+</div>
+
+<div class="row mt-3" data-testid="getting-started">
+  <div class="col-sm-2">
+    <strong class="float-right">Getting Started:</strong>
+  </div>
+  <div class="col-sm-10">
+    <% if @key_count < 1 %>
+      add a key under settings to get started ...
+    <% else %>
+      <code data-testid="code-snippet">
+        <%= snippet =<<~EO_SNIPPET
+          <div
+            data-widget-type="naas-version1"
+            data-token="jwt goes in here">
+          </div>
+          <script
+            type="text/javascript"
+            src="#{widget_url}">
+          </script>
+        EO_SNIPPET
+        %>
+      </code>
+    <% end %>
+  </div>
+</div>

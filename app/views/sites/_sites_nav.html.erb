@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col">
+    <ul class="nav nav-tabs" data-testid="site-nav">
+      <li class="nav-item">
+        <%= link_to "Overview", site_path(@site), class: "nav-link" + (action_name.to_sym == :show ? " active" : "") %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Notifications", notifications_site_path(@site), class: "nav-link" + (action_name.to_sym == :notifications ? " active" : "") %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Metrics", metrics_site_path(@site), class: "nav-link" + (action_name.to_sym == :metrics ? " active" : "") %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Access", access_site_path(@site), class: "nav-link" + (action_name.to_sym == :access ? " active" : "") %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Settings", settings_site_path(@site), class: "nav-link" + (action_name.to_sym == :settings ? " active" : "") %>
+      </li>
+    </ul>
+  </div>
+</div>

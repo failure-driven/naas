@@ -5,7 +5,7 @@ usage:
 	bin/makefile/usage
 
 rubocop_fix_all:
-	bundle exec rubocop -a .
+	bundle exec rubocop -A .
 
 prettier_ruby:
 	bin/makefile/prettier-ruby

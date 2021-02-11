@@ -1,0 +1,39 @@
+<li class="list-group-item">
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <%= label_tag :key %>
+        <%= text_field :key, :key, value: key.key, class: "form-control", readonly: true %>
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="form-group">
+        <%= label_tag :secret %>
+        <%= text_field :secret, :secret, value: key.secret, class: "form-control", readonly: true %>
+      </div>
+    </div>
+    <div class="col-1">
+      <div class="actions">
+        <%= label_tag :delete do %>
+          &nbsp;
+        <% end %>
+        <%= link_to(
+          destroy_key_site_path(key_id: key),
+          data: { confirm: "Are you sure?" },
+          method: :delete,
+          class: "forn-control btn btn-outline-danger float-right"
+        ) do %>
+          <i class="fa fa-trash"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <small>
+        <strong>Generated:</strong>
+        <%= key.created_at %>
+      </small>
+    </div>
+  </div>
+</li>

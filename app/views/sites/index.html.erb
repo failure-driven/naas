@@ -1,0 +1,19 @@
+<%= content_for :site_nav do %>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item">
+      <%= link_to "New site", new_site_path, class: "btn btn-primary" %>
+    </li>
+  </ul>
+<% end %>
+
+<div class="row">
+  <div class="col" data-testid="sites">
+    <% if @sites.empty? %>
+      add a site to get started ...
+    <% else %>
+      <ul class="list-group">
+        <%= render partial: "site", collection: @sites %>
+      </ul>
+    <% end %>
+  </div>
+</div>

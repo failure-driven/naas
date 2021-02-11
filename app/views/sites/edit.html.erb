@@ -1,0 +1,23 @@
+<%= content_for :site_nav do %>
+  <ul class="nav text-light">
+    <li class="nav-item">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-dark p-0">
+          <li class="breadcrumb-item text-light"><%= link_to "Sites", sites_path %></li>
+          <li class="breadcrumb-item active text-light" aria-current="page"><%= @site.url %></li>
+        </ol>
+      </nav>
+    </li>
+  </ul>
+<% end %>
+
+<%= render "sites_nav" %>
+
+<div class="row mt-3">
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-8">
+    <strong>Editing Site</strong>
+    <%= render "form", site: @site %>
+  </div>
+</div>

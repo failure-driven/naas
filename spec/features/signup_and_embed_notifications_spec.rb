@@ -28,6 +28,7 @@ feature "Signup and embed notification widget", js: true do
 
     When "Melanie signs up" do
       page.find("nav.navbar .nav-item a", text: "Sign up").click
+      wait_for { page.find("form.new_user") }
       page.find("form.new_user").fill_in("Email", with: "melanie@canvo.com")
       page.find("form.new_user").fill_in("Password", with: "password")
       page.find("form.new_user").fill_in("Password confirmation", with: "password")
@@ -79,18 +80,84 @@ feature "Signup and embed notification widget", js: true do
       end.to eq "Signed in successfully."
     end
 
-    And "she sees an option to register a new site" do
-      pending "a register new site link"
+    And "she sees no sites have been added and an option to add one" do
       wait_for do
-        page.find("a", text: "Register new site")
-      end.to be_truthy
+        page.find('[data-testid="sites"]').text
+      end.to eq "add a site to get started ..."
+      wait_for do
+        page.find_all('[data-testid="sites-nav"] .nav-item a').map(&:text)
+      end.to eq ["New site"]
     end
 
-    When "Melanie registers her site Canvo"
-    Then "she is shown a success message"
-    And "a site key as well as a code snippet to embed into her site"
+    When "Melanie registers her site Canvo" do
+      page
+        .find('[data-testid="sites-nav"] .nav-item a', text: "New site")
+        .click
+      page
+        .find("form[action=\"/sites\"]")
+        .fill_in("Url", with: "http://canvo.com")
+      page
+        .find('form[action="/sites"]')
+        .find('input[type="submit"]')
+        .click
+    end
 
-    When "Melanie embeds the code in Canvo and views Canvo"
+    Then "she is shown a success message" do
+      wait_for do
+        page.find('.alert [data-testid="message"]').text
+      end.to eq "Site was successfully created."
+    end
+
+    And "is told to generate a key and there is no code snippet" do
+      wait_for do
+        page.find('[data-testid="getting-started"]').text
+      end.to include("add a key under settings to get started")
+      wait_for do
+        page
+          .find('[data-testid="getting-started"]')
+          .find_all('[data-testid="code-snippet"]')
+      end.to be_empty
+    end
+
+    When "she goes to the settings tab and creates a key" do
+      page
+        .find("[data-testid=\"site-nav\"] .nav-item", text: "Settings")
+        .click
+      page.click_on("Create Key")
+    end
+
+    Then "she is show a success message and a key" do
+      wait_for do
+        page.find('.alert [data-testid="message"]').text
+      end.to eq "Key was successfully generated."
+    end
+
+    When "she goest to the overview tab" do
+      page
+        .find("[data-testid=\"site-nav\"] .nav-item", text: "Overview")
+        .click
+    end
+
+    Then "she sees a code snippet to embed into her site" do
+      wait_for do
+        page
+          .find('[data-testid="getting-started"]')
+          .find('[data-testid="code-snippet"]')
+          .text
+      end.to eq('<div data-widget-type="naas-version1" ' \
+        'data-token="jwt goes in here"> </div> <script ' \
+        'type="text/javascript" src="http://localhost:3001/naas"> ' \
+        "</script>")
+    end
+
+    When "Melanie copies and embeds the code in Canvo and views Canvo" do
+      pending "a code snippet copy button"
+      page
+        .find('[data-testid="getting-started"]')
+        .find('[data-testid="code-snippet-copy"]')
+        .click
+    end
+
     Then "she sees she has no notifications"
 
     When "Melanie creates a site wide notification for Canvo via NaaS interface and/or API"

@@ -1,0 +1,15 @@
+<%= content_for :site_nav do %>
+  <ul class="nav text-light m-auto">
+    <li class="nav-item">
+      create New Site
+    </li>
+  </ul>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-8">
+    <%= render "form", site: @site %>
+  </div>
+</div>
