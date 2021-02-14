@@ -35,7 +35,8 @@ feature "Widget", js: true do
     Then "user sees the result of the rendered widget" do
       wait_for do
         page.find('[data-widget-type|="naas"] [data-testid="data"]').text
-      end.to eq('{"msg":"hello","color":"cyan"}')
+      end.to eq("hello")
+      # end.to eq('{"msg":"hello","color":"cyan"}')
     end
 
     When "a user visits a demo app NOT on the server" do
@@ -62,7 +63,8 @@ feature "Widget", js: true do
     Then "user sees the result of the rendered widget" do
       wait_for do
         page.find('[data-widget-type|="naas"] [data-testid="data"]').text
-      end.to eq('{"msg":"hello","color":"cyan"}')
+      end.to eq("hello")
+      # end.to eq('{"msg":"hello","color":"cyan"}')
     end
   end
 end

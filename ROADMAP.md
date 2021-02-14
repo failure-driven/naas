@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] fix build
+- [X] fix build
 - [ ] User managment
 - [ ] sites per user model
 - [ ] security of reads
@@ -8,6 +8,7 @@
 - [ ] styling
   - site bar should not be a nav but it's own thing
   - use jumbotron for homepage ads
+  - how big is the widget, how to inline styles, is bootstrap being used?
 - [ ] useability
   - limit the number of keys
   - allow to add a user
