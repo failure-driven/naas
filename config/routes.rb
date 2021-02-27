@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :sites
-    resources :users
+    resources :users do
+      member do
+        get :send_admin_invitation
+      end
+    end
     resources :site_users
     resources :keys
     resources :notifications

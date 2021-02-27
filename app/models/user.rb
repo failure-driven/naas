@@ -7,4 +7,8 @@ class User < ApplicationRecord
 
   has_many :site_users
   has_many :sites, through: :site_users
+
+  def user_actions=(value)
+    self[:user_actions] = value.is_a?(String) ? JSON.parse(value) : value
+  end
 end

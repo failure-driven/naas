@@ -4,6 +4,11 @@
   <div class="collapse navbar-collapse" id="navbarContent">
     <% if signed_in? %>
       <ul class="navbar-nav">
+        <% if signed_in? && current_user.user_actions&.dig("admin", "can_administer") %>
+          <li class="nav-item">
+            <%= link_to "Admin", admin_root_path, class: "nav-link" %>
+          </li>
+        <% end %>
         <li class="nav-item">
           <%= link_to "Sites", sites_path, class: "nav-link" %>
         </li>

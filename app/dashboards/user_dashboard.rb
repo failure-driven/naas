@@ -12,6 +12,7 @@ class UserDashboard < Administrate::BaseDashboard
     sites: Field::HasMany,
     id: Field::String.with_options(searchable: false),
     email: Field::String,
+    user_actions: Field::JSONB,
     encrypted_password: Field::String,
     reset_password_token: Field::String,
     reset_password_sent_at: Field::DateTime,
@@ -51,6 +52,7 @@ class UserDashboard < Administrate::BaseDashboard
     sites
     id
     email
+    user_actions
     encrypted_password
     reset_password_token
     reset_password_sent_at
@@ -78,6 +80,7 @@ class UserDashboard < Administrate::BaseDashboard
     site_users
     sites
     email
+    user_actions
     encrypted_password
     reset_password_token
     reset_password_sent_at
@@ -110,8 +113,8 @@ class UserDashboard < Administrate::BaseDashboard
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
-  #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+
+  def display_resource(user)
+    "User: #{user.email}"
+  end
 end

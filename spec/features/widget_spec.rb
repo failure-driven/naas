@@ -14,6 +14,21 @@ feature "Widget", js: true do
   end
 
   scenario "A widget is displayed on another site" do
+    Given "an admin is logged in" do
+      user = User.new(
+        email: "deb.morrison@petcloud.com",
+        user_actions: { admin: { can_administer: true } },
+        password: "1password",
+        password_confirmation: "1password",
+      )
+      user.skip_confirmation!
+      user.save!
+      visit admin_root_path
+      page.find("form.new_user").fill_in("Email", with: "deb.morrison@petcloud.com")
+      page.find("form.new_user").fill_in("Password", with: "1password")
+      page.find("form.new_user").find('input[type="submit"]').click
+    end
+
     When "someone creates a new notifications" do
       # need to do this to start the rails server as well
       # as we could look before there are any notifications

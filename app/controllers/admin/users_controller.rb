@@ -18,16 +18,30 @@ module Admin
 
     # The result of this lookup will be available as `requested_resource`
 
+    def send_admin_invitation
+      # TODO: add a one time token for signin without calling the protected token generator
+      # token = requested_resource.send(:set_reset_password_token)
+      # requested_resource.send_reset_password_instructions
+      UserMailer
+        .with(user: requested_resource)
+        .admin_invitation
+        .deliver_later
+      redirect_to admin_user_path(requested_resource)
+    end
+
     # Override this if you have certain roles that require a subset
     # this will be used to set the records shown on the `index` action.
     #
-    # def scoped_resource
-    #   if current_user.super_admin?
-    #     resource_class
-    #   else
-    #     resource_class.with_less_stuff
-    #   end
-    # end
+    def scoped_resource
+      return resource_class if current_user.user_actions&.dig("admin", "can_administer")
+
+      super.where(id: current_user)
+      #   if current_user.super_admin?
+      #     resource_class
+      #   else
+      #     resource_class.with_less_stuff
+      #   end
+    end
 
     # Override `resource_params` if you want to transform the submitted
     # data before it's persisted. For example, the following would turn all

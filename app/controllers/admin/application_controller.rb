@@ -9,7 +9,7 @@ module Admin
     before_action :authenticate_admin
 
     def authenticate_admin
-      # TODO: Add authentication logic here.
+      authenticate_user!
     end
 
     # Override this value to specify the number of elements to display at a time
@@ -17,5 +17,23 @@ module Admin
     # def records_per_page
     #   params[:per_page] || 20
     # end
+
+    def valid_action?(name, resource = resource_class)
+      # TODO: in future let a user edit one self
+      # if resource_class == User &&
+      #    !current_user.user_actions&.dig("users", "can_edit")
+      #   false
+      if current_user.user_actions&.dig("admin", "can_administer")
+        true
+      else
+        %w[index new edit destroy].exclude?(name.to_s) && super
+      end
+    end
+
+    def scoped_resource
+      return super.none unless current_user.user_actions&.dig("admin", "can_administer")
+
+      super.all
+    end
   end
 end
